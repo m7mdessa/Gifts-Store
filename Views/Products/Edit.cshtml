@@ -1,0 +1,75 @@
+﻿@model Gifts_Store.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_MakerLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>GiftProduct</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" id="myForm" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Imagepath" />
+            <input type="hidden" asp-for="UserId" />
+
+            <div class="form-group">
+                <label asp-for="Namee" class="control-label"></label>
+                <input asp-for="Namee" class="form-control" />
+                <span asp-validation-for="Namee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descc" class="control-label"></label>
+                <input asp-for="Descc" class="form-control" />
+                <span asp-validation-for="Descc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sale" class="control-label"></label>
+                <input asp-for="Sale" class="form-control" />
+                <span asp-validation-for="Sale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Category.CategoryName" class="control-label"></label>
+                <input asp-for="@Model.Category.CategoryName" class="form-control" value="@ViewData["CategoryName"]" readonly />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <input asp-for="CategoryId" class="form-control" value="@ViewData["CategoryId"]" readonly />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" onclick="submitForm()" class="btn btn-primary" />
+            </div>
+            <script>
+                function submitForm() {
+                    var form = document.getElementById("myForm");
+                    form.submit();
+                }
+            </script>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

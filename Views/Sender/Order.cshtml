@@ -1,0 +1,182 @@
+﻿@model IEnumerable<Gifts_Store.Models.Orderr>
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+
+
+
+  @if (ViewBag.ID != null || ViewBag.SName != null)
+
+
+							{
+	<nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+		<div class="container">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a asp-controller="Sender" asp-action="Index">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">My Account</li>
+			</ol>
+		</div>
+	</nav>
+<div class="page-content">
+	<div class="Cart">
+		<div class="container">
+			<div class="row">
+				<aside class="col-md-4 col-lg-2">
+					<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+						
+					
+					  
+						@if (ViewBag.ID != null || @ViewBag.SName != null)
+
+							{
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="Order" asp-route-id="@ViewBag.ID" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="Edit" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Account Details</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="Payments" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Payments</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="Testimonial" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Add Testimonials</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="yourTestimonial" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Your Testimonials</a>
+								</li>
+
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Auth" asp-action="Logout">Sign Out</a>
+							</li>
+						}
+						else
+						{
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Auth" asp-action="Login">Sign In</a>
+							</li>
+						
+						}
+						
+					</ul>
+				</aside><!-- End .col-lg-3 -->
+
+				<div class="col-md-8 col-lg-10">
+					<div class="tab-content">
+						
+
+						<div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+
+								@if (ViewBag.ID != null || ViewBag.SName != null)
+								{
+									@if (TempData["order"] != null)
+									{
+										<div class="alert alert-@TempData["order"]" role="alert" style="text-align:center ; color: red;">
+											@TempData["order"]
+										</div>
+									}
+								<table class="table table-cart table-mobile">
+									<thead>
+										<tr>
+												<th >
+													Product
+												</th>
+
+												<th>
+												@Html.DisplayNameFor(model => model.Quantity)
+											</th>
+											
+											<th>
+													Category
+											</th>
+											<th>
+												@Html.DisplayNameFor(model => model.Price)
+											</th>
+												<th>
+													Total
+												</th>
+											<th>
+													Date
+												</th>
+												
+											<th>
+												@Html.DisplayNameFor(model => model.Status)
+											</th>
+										
+										</tr>
+									</thead>
+
+										
+							
+										<tbody>
+											
+@if (Model != null)
+{
+
+
+											@foreach (var item in Model)
+											{
+
+
+												<tr>
+														<td class="product-title">@item.ProductName</td>
+													<td>@item.Quantity</td>
+													<td>@item.CategoryName</td>
+													<td class="font-weight-bold">$@item.Price</td>
+													<td class="font-weight-bold">$@item.Totalprice</td>
+													<td>@item.DateOrder</td>
+													<td>@item.Status</td>
+												</tr>
+
+											}
+}
+
+
+										</tbody>
+
+
+
+									</table>
+							}
+							else if (ViewBag.ID != null || @ViewBag.SName != null)
+							{
+								<p>No order has been made yet.</p>
+								<a href="category.html" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+							}
+						</div><!-- .End .tab-pane -->
+
+					
+					</div>
+				</div><!-- End .col-lg-9 -->
+			</div><!-- End .row -->
+		</div><!-- End .container -->
+	</div><!-- End .dashboard -->
+</div><!-- End .page-content -->
+}
+
+else
+{
+	<div class="page-content">
+		<div class="dashboard">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-8 col-lg-9">
+
+
+
+						<p> To access to account you have to sing in first </p>
+								<a asp-action="Login" asp-controller="Auth" class="btn btn-outline-primary-2"><span>GO SING IN</span><i class="icon-long-arrow-right"></i></a>
+
+
+
+					</div><!-- End .col-lg-9 -->
+				</div><!-- End .row -->
+			</div><!-- End .container -->
+		</div><!-- End .dashboard -->
+	</div>
+
+	<!-- End .page-content -->
+}

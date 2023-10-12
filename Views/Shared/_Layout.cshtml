@@ -1,0 +1,187 @@
+﻿<!doctype html>
+<html class="no-js " lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+    <title>Admin dashboard</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <link rel="stylesheet" href="~/AdminAssets/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/AdminAssets/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css" />
+    <link rel="stylesheet" href="~/AdminAssets/assets/plugins/charts-c3/plugin.css" />
+    <link rel="stylesheet" href="~/AdminAssets/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="~/AdminAssets/assets/plugins/morrisjs/morris.min.css" />
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="~/AdminAssets/assets/css/style.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+     
+
+        .form-group {
+            position: relative;
+        }
+
+            .form-group .password-toggle-icon {
+                position: absolute;
+                right: 20px;
+                top: 70%;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+
+        .toggle-password-show {
+            display: none;
+        }
+
+        .toggle-password-hide {
+            display: inline-block;
+        }
+
+    </style>
+
+</head>
+
+<body class="theme-blush">
+
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="m-t-30"><img class="zmdi-hc-spin" src="~/AdminAssets/assets/images/loader.svg" width="48" height="48" alt="Aero"></div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+
+
+    <!-- Right Icon menu Sidebar -->
+    <div class="navbar-right">
+        <ul class="navbar-nav">
+
+            @if (ViewBag.ID != null || @ViewBag.AName != null)
+
+            {
+
+                <li><a asp-controller="Auth" asp-action="Logout"class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
+
+            }
+
+        </ul>
+    </div>
+
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <div class="menu">
+            <ul class="list">
+                <li>
+                  
+                    @if (ViewBag.ID != null || @ViewBag.AName != null)
+
+                    {
+
+                    <li>
+                        <div class="user-info">
+                            <a class="image" asp-controller="Admin" asp-action="editprofile" asp-route-id="@ViewBag.ID">
+                                <h4>@ViewBag.AName</h4>
+                            </a>
+                            <div class="detail">
+                                <small> Admin</small>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="active open"><a asp-action="Index" asp-controller="Admin"><span>Dashboard</span></a></li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Userrs"><span>Users</span></a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Orderrs"><span>Orders</span></a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Categories"><span>Categories</span></a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Gifts"><span>Gifts</span></a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Homes"><span>Home</span></a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Abouts"><span>About us</span></a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Contacts"><span>Contact us</span></a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Index" asp-controller="Testimonials"><span>Testimonials</span></a>
+
+                    </li>
+                    <li>
+                        <a asp-action="Reports" asp-controller="Admin"><span>Reports</span></a>
+
+                    </li>
+                   @* <li>
+                        <a asp-action="chartReports" asp-controller="Admin"><span>Chart</span></a>
+
+                    </li>*@
+                    }
+                 
+
+
+                
+            </ul>
+        </div>
+    </aside>
+
+        <section class="content">
+            @RenderBody()
+        </section>
+
+
+<!-- Jquery Core Js -->
+<script src="~/AdminAssets/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+<script src="~/AdminAssets/assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+<script src="~/AdminAssets/assets/bundles/jvectormap.bundle.js"></script> <!-- JVectorMap Plugin Js -->
+<script src="~/AdminAssets/assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
+<script src="~/AdminAssets/assets/bundles/c3.bundle.js"></script>
+
+<script src="~/AdminAssets/assets/bundles/mainscripts.bundle.js"></script>
+<script src="~/AdminAssets/assets/js/pages/index.js"></script>
+  
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="~/AdminAssets/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="~/AdminAssets/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="~/AdminAssets/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="~/AdminAssets/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="~/AdminAssets/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="~/AdminAssets/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="~/AdminAssets/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="~/AdminAssets/assets/js/pages/tables/jquery-datatable.js"></script>
+
+    <script src="~/AdminAssets/assets/plugins/chartjs/Chart.bundle.js"></script> <!-- Chart Plugins Js -->
+    <script src="~/AdminAssets/assets/plugins/chartjs/polar_area_chart.js"></script><!-- Polar Area Chart Js -->
+
+    <script src="~/AdminAssets/assets/js/pages/charts/chartjs.js"></script>
+    <script src="~/AdminAssets/assets/js/pages/charts/polar_area_chart.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,79 @@
+﻿@model Gifts_Store.Models.Bank
+
+@{
+	ViewData["Title"] = "Create";
+	Layout = "~/Views/Shared/_SenderLayout.cshtml";
+
+		var notificationId = ViewBag.NotificationId;
+
+}
+
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+	<div class="container">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a asp-action="Index" asp-controller="Sender">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Pay</li>
+		</ol>
+	</div>
+</nav>
+<div class="page-content">
+	<div class="checkout">
+		<div class="container">
+			@if (TempData["PaymentResult"] != null)
+			{
+				<div class="alert alert-@TempData["PaymentResultType"]" role="alert">
+					@TempData["PaymentResult"]
+				</div>
+			}
+			<form asp-action="Pay" enctype="multipart/form-data">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<input name="notificationId" type="hidden" value="@ViewBag.NotificationId" />
+				<div class="row">
+					<div class="col-lg-9">
+						<div class="row">
+							<div class="col-sm-6">
+								<label asp-for="CardNumber" class="control-label"></label>
+								<input asp-for="CardNumber" class="form-control" />
+								<span asp-validation-for="CardNumber" class="text-danger"></span>
+							</div><!-- End .col-sm-6 -->
+							<div class="col-sm-6">
+								<label asp-for="Cardholdername" class="control-label"></label>
+								<input asp-for="Cardholdername" class="form-control" />
+								<span asp-validation-for="Cardholdername" class="text-danger"></span>
+							</div><!-- End .col-sm-6 -->
+							<div class="col-sm-6">
+								<label asp-for="ExpirationDate" class="control-label"></label>
+								<input type="text" asp-for="ExpirationDate" class="form-control" />
+								<span asp-validation-for="ExpirationDate" class="text-danger"></span>
+							</div>
+
+							<!-- End .col-sm-6 -->
+						</div><!-- End .row -->
+
+						<div class="row">
+							<div class="col-sm-6">
+								<label asp-for="Cvv" class="control-label"></label>
+								<input asp-for="Cvv" class="form-control" />
+								<span asp-validation-for="Cvv" class="text-danger"></span>
+							</div><!-- End .col-sm-6 -->
+
+						</div><!-- End .row -->
+
+						<div class="row">
+						</div><!-- End .row -->
+
+						<button type="submit" class="btn btn-outline-primary-2">
+							<span>Pay</span>
+							<i class="icon-long-arrow-right"></i>
+						</button>
+
+
+
+
+					</div><!-- End .col-lg-9 -->
+				</div><!-- End .row -->
+			</form>
+		</div><!-- End .container -->
+	</div><!-- End .checkout -->
+</div><!-- End .page-content -->

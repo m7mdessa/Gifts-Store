@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Gifts_Store.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Categories List</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Admin</a></li>
+                    <li class="breadcrumb-item">Categories</li>
+                </ul>
+                <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                <a class="btn btn-success btn-icon float-right" asp-action="Create" type="button"><i class="zmdi zmdi-plus"></i></a>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-hover product_item_list c_table theme-color mb-0">
+                            <thead>
+                                <tr>
+
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CategoryName)
+                                    </th>
+                                    <th>
+                                        Image
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CategoryName)
+                                        </td>
+                                        <td>
+                                            <img src="@Url.Content("~/images/"+item.Imagepath)" width="60" alt="Product img">
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default waves-effect waves-float btn-sm waves-green">Edit</a>
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-default waves-effect waves-float btn-sm waves-red">Details</a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-default waves-effect waves-float btn-sm waves-red">Delete</a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

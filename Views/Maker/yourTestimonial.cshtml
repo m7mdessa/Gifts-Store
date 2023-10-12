@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Gifts_Store.Models.Testimonial>
+
+@{
+    ViewData["Title"] = "yourTestimonial";
+	Layout = "~/Views/Shared/_MakerLayout.cshtml";
+}
+
+@if (ViewBag.ID != null || @ViewBag.MName != null)
+
+{
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Your Testimonials</h4>
+
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tr>
+
+                                  
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Namee)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Content)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DateTestimonial)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>
+                                </tr>
+                                @if (Model != null)
+                                {
+
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Namee)
+                                            </td>
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.Content)
+
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DateTestimonial)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Status)
+                                            </td>
+
+
+
+                                        </tr>
+                                    }
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+}

@@ -1,0 +1,157 @@
+﻿@model Gifts_Store.Models.Userr
+
+@{
+	Layout = "~/Views/Shared/_SenderLayout.cshtml";
+	var userId = ViewBag.Id;
+
+}
+
+<div class="login-page pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17">
+	<div class="container">
+		<div class="form-box">
+			<div class="form-tab">
+				<ul class="nav nav-pills nav-fill" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="true">Reset Password</a>
+					</li>
+
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+
+						@if (TempData["SuccessMessage"] != null)
+						{
+							<h6 style="text-align:center ; color: red;">
+								@TempData["SuccessMessage"]
+							</h6>
+						}
+						@if (TempData["ErrorMessage"] != null)
+						{
+							<h6 style="text-align:center ; color: red;">
+								@TempData["ErrorMessage"]
+							</h6>
+
+						}
+						<form asp-action="Rpass" enctype="multipart/form-data" onsubmit="return validatePassword()">
+							<input name="userId" type="hidden" value="@ViewBag.Id" />
+
+
+						
+							<div class="form-group">
+
+								<label>New password </label>
+								<input type="password" name="newPass" id="newPass" class="form-control">
+								<div class="password-toggle-icon">
+									<i class="toggle-password-icon toggle-password-show" data-feather="eye"></i>
+									<i class="toggle-password-icon toggle-password-hide" data-feather="eye-off"></i>
+								</div>
+								<span id="newPasswordError" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+
+								<label>Confirm new password</label>
+								<input type="password" name="rePass" id="rPass" class="form-control mb-2">
+								<div class="password-toggle-icon">
+									<i class="toggle-password-icon toggle-password-show" data-feather="eye"></i>
+									<i class="toggle-password-icon toggle-password-hide" data-feather="eye-off"></i>
+								</div>
+								<span id="confirmPasswordError" class="text-danger"></span>
+							</div>
+
+							<div class="form-footer">
+								<button type="submit" class="btn btn-outline-primary-2">
+									<span>Send</span>
+									<i class="icon-long-arrow-right"></i>
+								</button>
+
+
+
+								<a asp-action="Login" asp-controller="Auth" class="forgot-link">Back to sign in</a>
+
+							</div><!-- End .form-footer -->
+						</form>
+						<script>
+							feather.replace();
+						</script>
+
+						<script>
+							
+							$(document).ready(function () {
+								$('.password-toggle-icon').click(function () {
+									var passwordInput = $('#newPass');
+
+
+									var showIcon = $('.toggle-password-show');
+									var hideIcon = $('.toggle-password-hide');
+
+									if (passwordInput.attr('type') === 'password') {
+										passwordInput.attr('type', 'text');
+										showIcon.hide();
+										hideIcon.show();
+									} else {
+										passwordInput.attr('type', 'password');
+										hideIcon.hide();
+										showIcon.show();
+									}
+								});
+							}); $(document).ready(function () {
+								$('.password-toggle-icon').click(function () {
+									var passwordInput = $('#rPass');
+
+
+									var showIcon = $('.toggle-password-show');
+									var hideIcon = $('.toggle-password-hide');
+
+									if (passwordInput.attr('type') === 'password') {
+										passwordInput.attr('type', 'text');
+										showIcon.hide();
+										hideIcon.show();
+									} else {
+										passwordInput.attr('type', 'password');
+										hideIcon.hide();
+										showIcon.show();
+									}
+								});
+							});
+
+							var toggleIcon = document.querySelector('.toggle-password-icon');
+							toggleIcon.addEventListener('click', togglePasswordVisibility);
+
+							var toggleIcon = document.querySelector('.toggle-password-icon');
+							toggleIcon.addEventListener('click', togglePasswordVisibility);
+
+							var toggleIcon = document.querySelector('.toggle-password-icon');
+							toggleIcon.addEventListener('click', togglePasswordVisibility);
+
+							function validatePassword() {
+								var newPassword = document.getElementById("newPass").value;
+								var confirmPassword = document.getElementById("rPass").value;
+								var newPasswordError = document.getElementById("newPasswordError");
+								var confirmPasswordError = document.getElementById("confirmPasswordError");
+								var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
+
+								newPasswordError.textContent = "";
+								confirmPasswordError.textContent = "";
+
+								if (!passwordPattern.test(newPassword)) {
+									newPasswordError.textContent = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";
+									return false;
+								}
+								if (!passwordPattern.test(confirmPassword)) {
+									confirmPasswordError.textContent = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";
+									return false;
+								}
+								if (newPassword !== confirmPassword) {
+									confirmPasswordError.textContent = "New password and confirm password do not match.";
+									return false;
+								}
+
+								return true;
+							}
+						</script>
+					</div><!-- .End .tab-pane -->
+				</div><!-- End .tab-content -->
+			</div><!-- End .form-tab -->
+		</div><!-- End .form-box -->
+	</div><!-- End .container -->
+</div><!-- End .login-page section-bg -->

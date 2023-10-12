@@ -1,0 +1,198 @@
+﻿@model Gifts_Store.Models.Userr
+
+@{
+    ViewData["Title"] = "editprofile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>editprofile</h1>
+
+<h4>Admin</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+
+        <form asp-action="editprofile" nsubmit="return validatePassword()" id="myForm" enctype="multipart/form-data">
+            @if (TempData["UpdateMessage"] != null)
+            {
+                <h5 style=" color: red;">
+
+                    @TempData["UpdateMessage"]
+
+                </h5>
+            }
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+             
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                    <input asp-for="Username" class="form-control" readonly />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" readonly />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" readonly />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" asp-for="Passwordd" value="@Model.Passwordd" id="password" class="form-control">
+                <div class="password-toggle-icon">
+                    <i class="toggle-password-icon toggle-password-show" data-feather="eye"></i>
+                    <i class="toggle-password-icon toggle-password-hide" data-feather="eye-off"></i>
+                </div>
+                <span asp-validation-for="Passwordd" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>New password </label>
+                <input type="password" name="newPass" id="newPass" class="form-control">
+                <div class="password-toggle-icon">
+                    <i class="toggle-password-icon toggle-password-show" data-feather="eye"></i>
+                    <i class="toggle-password-icon toggle-password-hide" data-feather="eye-off"></i>
+                </div>
+                <span id="newPasswordError" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label>Confirm new password</label>
+                <input type="password" name="rPass" id="rPass" class="form-control mb-2">
+                <div class="password-toggle-icon">
+                    <i class="toggle-password-icon toggle-password-show" data-feather="eye"></i>
+                    <i class="toggle-password-icon toggle-password-hide" data-feather="eye-off"></i>
+                </div>
+                <span id="confirmPasswordError" class="text-danger"></span>
+            </div>
+             
+
+              
+            <div class="form-group">
+                <input type="button" value="Save" class="btn btn-primary" onclick="submitForm()" />
+            </div>
+            <script>
+                function submitForm() {
+                    var form = document.getElementById("myForm");
+                    form.submit();
+                }
+            </script>
+        </form>
+        <script>
+            feather.replace();
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('.password-toggle-icon').click(function () {
+                    var passwordInput = $('#password');
+
+
+                    var showIcon = $('.toggle-password-show');
+                    var hideIcon = $('.toggle-password-hide');
+
+                    if (passwordInput.attr('type') === 'password') {
+                        passwordInput.attr('type', 'text');
+                        showIcon.hide();
+                        hideIcon.show();
+                    } else {
+                        passwordInput.attr('type', 'password');
+                        hideIcon.hide();
+                        showIcon.show();
+                    }
+                });
+            });
+            $(document).ready(function () {
+                $('.password-toggle-icon').click(function () {
+                    var passwordInput = $('#newPass');
+
+
+                    var showIcon = $('.toggle-password-show');
+                    var hideIcon = $('.toggle-password-hide');
+
+                    if (passwordInput.attr('type') === 'password') {
+                        passwordInput.attr('type', 'text');
+                        showIcon.hide();
+                        hideIcon.show();
+                    } else {
+                        passwordInput.attr('type', 'password');
+                        hideIcon.hide();
+                        showIcon.show();
+                    }
+                });
+            });
+            $(document).ready(function () {
+                $('.password-toggle-icon').click(function () {
+                    var passwordInput = $('#rPass');
+
+
+                    var showIcon = $('.toggle-password-show');
+                    var hideIcon = $('.toggle-password-hide');
+
+                    if (passwordInput.attr('type') === 'password') {
+                        passwordInput.attr('type', 'text');
+                        showIcon.hide();
+                        hideIcon.show();
+                    } else {
+                        passwordInput.attr('type', 'password');
+                        hideIcon.hide();
+                        showIcon.show();
+                    }
+                });
+            });
+
+            var toggleIcon = document.querySelector('.toggle-password-icon');
+            toggleIcon.addEventListener('click', togglePasswordVisibility);
+
+            var toggleIcon = document.querySelector('.toggle-password-icon');
+            toggleIcon.addEventListener('click', togglePasswordVisibility);
+
+            var toggleIcon = document.querySelector('.toggle-password-icon');
+            toggleIcon.addEventListener('click', togglePasswordVisibility);
+
+            function validatePassword() {
+                var newPassword = document.getElementById("newPass").value;
+                var confirmPassword = document.getElementById("rPass").value;
+                var newPasswordError = document.getElementById("newPasswordError");
+                var confirmPasswordError = document.getElementById("confirmPasswordError");
+                var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
+
+                newPasswordError.textContent = "";
+                confirmPasswordError.textContent = "";
+
+                if (!passwordPattern.test(newPassword)) {
+                    newPasswordError.textContent = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";
+                    return false;
+                }
+                if (!passwordPattern.test(confirmPassword)) {
+                    confirmPasswordError.textContent = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";
+                    return false;
+                }
+                if (newPassword !== confirmPassword) {
+                    confirmPasswordError.textContent = "New password and confirm password do not match.";
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

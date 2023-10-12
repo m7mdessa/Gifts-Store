@@ -1,0 +1,288 @@
+﻿@model Gifts_Store.Models.Userr
+
+@{
+	ViewData["Title"] = "Dashboard";
+	Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+
+	@if (ViewBag.ID != null || ViewBag.SName != null)
+						{
+						
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+	<div class="container">
+		<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a asp-controller ="Sender" asp-action="Index">Home</a></li>
+			<li class="breadcrumb-item active" aria-current="page">My Account</li>
+		</ol>
+	</div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+						
+<div class="page-content">
+	<div class="dashboard">
+		<div class="container">
+			<div class="row">
+				<aside class="col-md-4 col-lg-3">
+					<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+
+					
+
+						
+						@if (ViewBag.ID != null || ViewBag.SName != null)
+
+						{
+							<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="Order" asp-route-id="@ViewBag.ID" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+							</li>
+							<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="Edit" asp-route-id="@ViewBag.ID" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
+							</li>
+							<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="Payments" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Payments</a>
+							</li>
+							<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="Testimonial" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Add Testimonials</a>
+							</li>
+								<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="yourTestimonial" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Your Testimonials</a>
+								</li>
+
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Auth" asp-action="Logout">Sign Out</a>
+							</li>
+						}
+						else
+						{
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Auth" asp-action="Login">Sign In</a>
+							</li>
+
+						}
+
+					</ul>
+				</aside><!-- End .col-lg-3 -->
+
+				<div class="col-md-8 col-lg-9">
+
+
+
+
+					<div class="tab-content">
+
+						
+							<div class="tab-pane fade show active" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+								<form asp-action="Edit" onsubmit="return validatePassword()" >
+									<input type="hidden" asp-for="Id" />
+									@if (TempData["UpdateMessage"] != null)
+									{
+										<h5 style=" color: red;">
+
+											@TempData["UpdateMessage"]
+
+										</h5>
+									}
+
+								
+
+									<div class="row">
+
+									<div class="col-sm-6">
+
+									<label>User Name </label>
+									<input asp-for="Username" value ="@Model.Username"class="form-control" readonly/>
+										<span asp-validation-for="Username" class="text-danger"></span>
+
+									</div>
+									<div class="col-sm-6">
+
+									<label>Email address </label>
+									<input asp-for="Email" value="@Model.Email" class="form-control" readonly />
+									<span asp-validation-for="Email" class="text-danger"></span>
+									</div>
+									
+									</div>
+									<div class="row">
+
+										<div class="col-sm-6">
+											<label>Address</label>
+											<input asp-for="Address" value="@Model.Address" class="form-control" readonly />
+											<span asp-validation-for="Address" class="text-danger"></span>
+										</div>
+										<div class="col-sm-6">
+
+											<label>Phone number </label>
+											<input asp-for="Phone" class="form-control" readonly/>
+											<span asp-validation-for="Phone" class="text-danger"></span>
+										</div>
+									</div>
+									<div class="row">
+
+										<div class="col-sm-6">
+											<label for="password">Password</label>
+											<input type="password"asp-for="Passwordd" value="@Model.Passwordd" id="password" class="form-control">
+											<div class="password-toggle-icon">
+												<i class="toggle-password-icon toggle-password-show" data-feather="eye"></i>
+												<i class="toggle-password-icon toggle-password-hide" data-feather="eye-off"></i>
+											</div>
+											<span asp-validation-for="Passwordd" class="text-danger"></span>
+
+										</div>
+
+									<div class="col-sm-6">
+
+									<label>New password </label>
+									<input type="password" name="newPass" id="newPass" class="form-control">
+											<div class="password-toggle-icon">
+												<i class="toggle-password-icon toggle-password-show" data-feather="eye"></i>
+												<i class="toggle-password-icon toggle-password-hide" data-feather="eye-off"></i>
+											</div>
+											<span id="newPasswordError" class="text-danger"></span>
+										</div>
+									<div class="col-sm-6">
+
+									<label>Confirm new password</label>
+									<input type="password" name="rPass" id="rPass" class="form-control mb-2">
+											<div class="password-toggle-icon">
+												<i class="toggle-password-icon toggle-password-show" data-feather="eye"></i>
+												<i class="toggle-password-icon toggle-password-hide" data-feather="eye-off"></i>
+											</div>
+											<span id="confirmPasswordError" class="text-danger"></span>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-outline-primary-2">
+										<span>SAVE CHANGES</span>
+										<i class="icon-long-arrow-right"></i>
+									</button>
+								</form>
+								<script>
+									feather.replace();
+								</script>
+								
+								<script>
+									$(document).ready(function () {
+										$('.password-toggle-icon').click(function () {
+											var passwordInput = $('#password');
+
+
+											var showIcon = $('.toggle-password-show');
+											var hideIcon = $('.toggle-password-hide');
+
+											if (passwordInput.attr('type') === 'password') {
+												passwordInput.attr('type', 'text');
+												showIcon.hide();
+												hideIcon.show();
+											} else {
+												passwordInput.attr('type', 'password');
+												hideIcon.hide();
+												showIcon.show();
+											}
+										});
+									});
+									$(document).ready(function () {
+										$('.password-toggle-icon').click(function () {
+											var passwordInput = $('#newPass');
+
+
+											var showIcon = $('.toggle-password-show');
+											var hideIcon = $('.toggle-password-hide');
+
+											if (passwordInput.attr('type') === 'password') {
+												passwordInput.attr('type', 'text');
+												showIcon.hide();
+												hideIcon.show();
+											} else {
+												passwordInput.attr('type', 'password');
+												hideIcon.hide();
+												showIcon.show();
+											}
+										});
+									}); $(document).ready(function () {
+										$('.password-toggle-icon').click(function () {
+											var passwordInput = $('#rPass');
+
+
+											var showIcon = $('.toggle-password-show');
+											var hideIcon = $('.toggle-password-hide');
+
+											if (passwordInput.attr('type') === 'password') {
+												passwordInput.attr('type', 'text');
+												showIcon.hide();
+												hideIcon.show();
+											} else {
+												passwordInput.attr('type', 'password');
+												hideIcon.hide();
+												showIcon.show();
+											}
+										});
+									});
+
+									var toggleIcon = document.querySelector('.toggle-password-icon');
+									toggleIcon.addEventListener('click', togglePasswordVisibility);
+									
+									var toggleIcon = document.querySelector('.toggle-password-icon');
+									toggleIcon.addEventListener('click', togglePasswordVisibility);
+
+									var toggleIcon = document.querySelector('.toggle-password-icon');
+									toggleIcon.addEventListener('click', togglePasswordVisibility);
+
+									function validatePassword() {
+										var newPassword = document.getElementById("newPass").value;
+										var confirmPassword = document.getElementById("rPass").value;
+										var newPasswordError = document.getElementById("newPasswordError");
+										var confirmPasswordError = document.getElementById("confirmPasswordError");
+										var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$/;
+
+										newPasswordError.textContent = "";
+										confirmPasswordError.textContent = "";
+
+										if (!passwordPattern.test(newPassword)) {
+											newPasswordError.textContent = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";
+											return false;
+										}
+										if (!passwordPattern.test(confirmPassword)) {
+											confirmPasswordError.textContent = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.";
+											return false;
+										}
+										if (newPassword !== confirmPassword) {
+											confirmPasswordError.textContent = "New password and confirm password do not match.";
+											return false;
+										}
+
+										return true;
+									}
+								</script>
+							</div>
+						
+					</div>
+					
+				</div><!-- End .col-lg-9 -->
+				
+			</div><!-- End .row -->
+		</div><!-- End .container -->
+	</div><!-- End .dashboard -->
+</div><!-- End .page-content -->
+}
+else
+{
+<div class="page-content">
+	<div class="dashboard">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-8 col-lg-9">
+
+
+
+					<p> To access to account you have to sing in first </p>
+					<a asp-action="Login" asp-controller="Auth" class="btn btn-outline-primary-2"><span>GO SING IN</span><i class="icon-long-arrow-right"></i></a>
+
+
+
+				</div><!-- End .col-lg-9 -->
+			</div><!-- End .row -->
+		</div><!-- End .container -->
+	</div><!-- End .dashboard -->
+</div>
+
+<!-- End .page-content -->
+}

@@ -1,0 +1,143 @@
+﻿@model Tuple<IEnumerable<Category>, IEnumerable <Product> > ;
+
+
+@{
+    ViewData["Title"] = "Gifts";
+    Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+                <div class="container">
+                    <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Sender">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Gifts</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+     @if(ViewBag.ID != null || @ViewBag.SName != null)
+
+
+{
+            <div class="page-content">
+                <div class="container">
+                	<div class="row">
+                		<div class="col-lg-9">
+
+                            <div class="products mb-3">
+                                <div class="row justify-content-center">
+                                          @foreach (var item in Model.Item2)
+                {
+
+							@if (Model != null)
+							{
+                                
+
+                                        <div class="col-6 col-md-4 col-lg-4">
+                                        <form action="@Url.Action("Order", "Sender")"  enctype="multipart/form-data" method="post">
+                                        @Html.Hidden("ProductId", item.Id)
+                                        @Html.Hidden("ProductName", item.Namee)
+                                        @Html.Hidden("CategoryName", item.Category?.CategoryName)
+                                        @Html.Hidden("Price", item.Price)
+                                        @Html.Hidden("DateOrder", DateTime.Now)
+                                        @Html.Hidden("Status", "Pending")
+                                        <input type="hidden" name="userId" value="@ViewBag.ID" />
+                                            <div class="product product-7 text-center">
+                                                <figure class="product-media">
+                                                    <a asp-action="giftDetail" asp-route-id="@item?.Id">
+                                                        <img src="@Url.Content("~/images/"+item.Imagepath)" alt="Product image" class="product-image">
+                                                    </a>
+
+                                                    <div class="product-action">
+
+                                                        <a class="btn-product" asp-action="giftDetail" asp-route-id="@item?.Id"><span>View Gift</span></a>
+                                                    </div>
+                                                </figure>
+
+                                                <div class="product-body">
+                                                    <div class="product-cat">
+                                                        <a href="#">@item.CategoryId</a>
+                                                    </div><!-- End .product-cat -->
+                                                    <h3 class="product-title"><a href="product.html">@item?.Namee</a></h3><!-- End .product-title -->
+                                                    
+                                                    <div class="product-price">
+
+                                                        $@item?.Price
+                                                        
+                                                    </div><!-- End .product-price -->
+
+                                                    <input type="hidden" name="TotalPrice" value="" /> <!-- Remove the initial value for TotalPrice -->
+                                                </div><!-- End .product-body -->
+                                            </div>
+                                            </form>
+
+                                        
+                                        </div>
+                                }}
+                                </div><!-- End .row -->
+                            </div><!-- End .products -->
+
+                		</div><!-- End .col-lg-9 -->
+                		<aside class="col-lg-3 order-lg-first">
+                			<div class="sidebar sidebar-shop">
+                				
+                				<div class="widget widget-collapsible">
+    								<h3 class="widget-title">
+									    <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+									        Category
+									    </a>
+									</h3><!-- End .widget-title -->
+
+									<div class="collapse show" id="widget-1">
+										<div class="widget-body">
+											<div class="filter-items filter-items-count">
+                                         @foreach (var item in Model.Item1)
+                                            {
+
+							                @if (Model != null)
+							                {
+                                
+												<div class="filter-item">
+													<div class="custom-control ">
+                                                        <a class="btn btn-outline-primary-2" for="cat-1" asp-action="giftsPercategory" asp-route-id="@item?.Id">@item.CategoryName</a>
+													</div>
+                                                    
+
+                                                  
+												</div><!-- End .filter-item -->
+
+
+                                            }}
+											</div><!-- End .filter-items -->
+										</div><!-- End .widget-body -->
+									</div><!-- End .collapse -->
+        						</div><!-- End .widget -->
+
+                			</div><!-- End .sidebar sidebar-shop -->
+                		</aside><!-- End .col-lg-3 -->
+                	</div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+			}
+else
+{
+<div class="page-content">
+    <div class="dashboard">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 col-lg-9">
+
+
+
+                    <p> To access on that you have to sing in first </p>
+                    <a asp-action="Login" asp-controller="Auth" class="btn btn-outline-primary-2"><span>GO SING IN</span><i class="icon-long-arrow-right"></i></a>
+
+
+
+                </div><!-- End .col-lg-9 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .dashboard -->
+</div>
+
+<!-- End .page-content -->
+}

@@ -1,0 +1,44 @@
+﻿@model Gifts_Store.Models.Testimonial
+
+@{
+	ViewData["Title"] = "Dashboard";
+	Layout = "~/Views/Shared/_MakerLayout.cshtml";
+}
+
+<h1>Create</h1>
+<h4>Testimonial</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Testimonial" id="myForm" enctype="multipart/form-data">
+            <input asp-for="UserId" type="hidden" value="@ViewBag.ID" class="form-control" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Namee" class="control-label"></label>
+                <input asp-for="Namee" class="form-control" />
+                <span asp-validation-for="Namee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea class="form-control" asp-for="Content" cols="30" rows="4" placeholder="Testimonial "></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+   
+
+            <div class="form-group">
+                <input type="submit" value="Create" onclick="submitForm()" class="btn btn-primary" />
+            </div>
+            <script>
+                function submitForm() {
+                    var form = document.getElementById("myForm");
+                    form.submit();
+                }
+            </script>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

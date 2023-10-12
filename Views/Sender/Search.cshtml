@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Gifts_Store.Models.Search>
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+@if (Model == null || !Model.Any())
+{
+    <div class="page-content">
+        <div class="categories-page">
+            <div class="container">
+                <div class="row">
+                    <h3 style="text-align:center ; color: red;">
+                        No category or product is found.
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="page-content">
+        <div class="categories-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        @foreach (var item in Model)
+                        {
+                            @if (item.category != null)
+                            {
+                                <div class="banner banner-cat banner-badge">
+                                    <figure class="product-media">
+                                        <a href="#">
+                                            <img src="@Url.Content("~/images/" + item.category.Imagepath)" alt="Banner">
+                                        </a>
+                                    </figure>
+                                    <a class="banner-link" asp-action="giftsPercategory" asp-route-id="@item.category.Id">
+                                        <h3 class="banner-title">@item.category.CategoryName</h3>
+                                        <span class="banner-link-text">Shop Now</span>
+                                    </a>
+                                </div>
+                            }
+                            else if (item.product != null)
+                            {
+                                <div class="banner banner-cat banner-badge">
+                                    <figure class="product-media">
+                                        <a href="#">
+                                            <img src="@Url.Content("~/images/" + item.product.Imagepath)" alt="Banner">
+                                        </a>
+                                    </figure>
+                                    <a class="banner-link" asp-action="giftDetail" asp-route-id="@item.product.Id">
+                                        <h3 class="banner-title product-title">@item.product.Namee</h3>
+                                        <span class="banner-link-text">View Gift</span>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

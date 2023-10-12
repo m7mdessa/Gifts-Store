@@ -1,0 +1,84 @@
+﻿@model Gifts_Store.Models.Contact
+
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Sender">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contact us</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+    <div class="container">
+
+
+    <div class="page-content pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-2 mb-lg-0">
+                    <div class="row">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13491.949316797929!2d35.905409753322616!3d32.28531862189077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c81caddea06cf%3A0x217344ea8c434f49!2z2YXYrNmF2Lkg2KjYp9i12KfYqiDYrNix2LQg2KfZhNis2K_Zitiv!5e0!3m2!1sar!2sjo!4v1687945670717!5m2!1sar!2sjo" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                    </div><!-- End .row -->
+                </div><!-- End .col-lg-6 -->
+                <div class="col-lg-6">
+
+                    <form asp-action="Contact" enctype="multipart/form-data" class="contact-form mb-3">
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <h6 style="text-align:center ; color: red;">
+                                @TempData["SuccessMessage"]
+                            </h6>
+                        }
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="cname" class="sr-only">Name</label>
+                                <input type="text" asp-for="Namee" class="form-control" id="cname" placeholder="Name " >
+                                <span asp-validation-for="Namee" class="text-danger"></span>
+
+                            </div><!-- End .col-sm-6 -->
+
+                            <div class="col-sm-6">
+                                <label for="cemail" class="sr-only">Email</label>
+                                <input type="email" asp-for="Email" class="form-control" id="cemail" placeholder="Email " >
+                                <span asp-validation-for="Email" class="text-danger"></span>
+
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="cphone" class="sr-only">Phone</label>
+                                <input type="tel" asp-for="Phone" class="form-control" id="cphone" placeholder="Phone">
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+
+                            </div><!-- End .col-sm-6 -->
+
+                            <div class="col-sm-6">
+                                <label for="csubject" class="sr-only">Subject</label>
+                                <input type="text" asp-for="Subject" class="form-control" id="csubject" placeholder="Subject">
+                                <span asp-validation-for="Subject" class="text-danger"></span>
+
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <label for="cmessage" class="sr-only">Message</label>
+                        <textarea class="form-control" asp-for="Message" cols="30" rows="4" id="cmessage"  placeholder="Message "></textarea>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+
+                        <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
+                            <span>SUBMIT</span>
+                            <i class="icon-long-arrow-right"></i>
+                        </button>
+                    </form><!-- End .contact-form -->
+                </div><!-- End .col-lg-6 -->
+            </div><!-- End .row -->
+
+
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+    </div>

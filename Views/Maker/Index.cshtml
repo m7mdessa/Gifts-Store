@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Gifts_Store.Models.Notification>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MakerLayout.cshtml";
+}
+@if (ViewBag.ID != null || @ViewBag.MName != null)
+
+{
+   
+
+    <section class="section">
+        <div class="row ">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="card">
+                    <div class="card-statistic-4">
+                        <div class="align-items-center justify-content-between">
+                            <div class="row ">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                    <div class="card-content">
+                                        <h5 class="font-15">Notifications</h5>
+                                        <h2 class="mb-3 font-18">@ViewBag.Notifications</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                    <div class="banner-img">
+                                        <img src="assets/img/banner/1.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="card">
+                    <div class="card-statistic-4">
+                        <div class="align-items-center justify-content-between">
+                            <div class="row ">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                    <div class="card-content">
+                                        <h5 class="font-15"> Gifts</h5>
+                                        <h2 class="mb-3 font-18">@ViewBag.Gifts</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                    <div class="banner-img">
+                                        <img src="assets/img/banner/2.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="card">
+                    <div class="card-statistic-4">
+                        <div class="align-items-center justify-content-between">
+                            <div class="row ">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                    <div class="card-content">
+                                        <h5 class="font-15"> Sales</h5>
+                                        <h2 class="mb-3 font-18">@ViewBag.Sales</h2>
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                    <div class="banner-img">
+                                        <img src="assets/img/banner/3.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Notifications</h4>
+                        
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tr>
+                                   
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Username)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Email)
+                                    </th>
+                                     <th>
+                                        @Html.DisplayNameFor(model => model.Address)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Quantity)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ProductName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CategoryName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Price)
+                                    </th>
+                                    <th>
+                                            Notifications Date
+                                    </th>
+
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>
+
+                                    <th>
+                                        Action
+                                    </th>
+                                    
+                                    <th>
+                                        Action
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                                @if (Model != null)
+                                {
+
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+
+
+                                            <td>@item.Username</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.Address</td>
+                                            <td>@item.Quantity</td>
+                                            <td>@item.ProductName</td>
+                                            <td>@item.CategoryName</td>
+                                            <td class="font-weight-bold">$@item.Price</td>
+                                            <td>@item.DateOrder</td>
+                                            <td>@item.Status</td>
+                                    
+                                            <td><a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a></td>
+                                            <td><a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Detail</a></td>
+                                            <td><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary">Delete</a></td>
+
+                                        </tr>
+                                    }
+                                }  
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    }

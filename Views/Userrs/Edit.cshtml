@@ -1,0 +1,83 @@
+﻿@model Gifts_Store.Models.Userr
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Userr</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" id="myForm" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CategoryId" />
+            <input type="hidden" asp-for="RoleId" />
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" readonly />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Passwordd" class="control-label">Password</label>
+                <input asp-for="Passwordd" type="password"value="@Model.Passwordd" class="form-control" readonly />
+                <span asp-validation-for="Passwordd" class="text-danger"></span>
+            </div>
+   
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" readonly />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" readonly />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <label  class="control-label">Rolename</label>
+                <input asp-for="RoleId" class="form-control" value="@ViewBag.Rolename" readonly />
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
+       
+
+            <div class="form-group">
+                <label class="control-label">CategoryName</label>
+                <input asp-for="CategoryId" class="form-control" value="@ViewBag.CategoryName" readonly />
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="1" name="Status">
+                    <option value="Accepted">Accepted</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Save" class="btn btn-primary" onclick="submitForm()" />
+            </div>
+            <script>
+                function submitForm() {
+                    var form = document.getElementById("myForm");
+                    form.submit();
+                }
+            </script>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Gifts_Store.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MakerLayout.cshtml";
+}
+
+
+
+@if (ViewBag.ID != null || @ViewBag.MName != null)
+
+{
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Gifts</h4>
+                        <a class="" asp-action="Create" type="button">Create new gift</a>
+
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tr>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Imagepath)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Namee)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Descc)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Sale)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Quantity)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Price)
+                                    </th>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Category)
+                                    </th>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CategoryId)
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                                @if (Model != null)
+                                {
+
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+
+                                            <td><img src="@Url.Content("~/images/"+item.Imagepath)" width="48" alt="Product img"></td>
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.Namee)
+                                            </td>
+                                            <td>
+                                                
+                                                    @Html.DisplayFor(modelItem => item.Descc)
+                                                
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.Sale)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Quantity)
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.Price)
+                                            </td>
+                                            <td>
+                                                   
+                                                @ViewData["CategoryName"]
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.CategoryId)
+                                            </td>
+
+                                            <td><a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a></td>
+                                            <td><a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Detail</a></td>
+                                            <td><a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-primary">Delete</a></td>
+
+                                        </tr>
+                                    }
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+}

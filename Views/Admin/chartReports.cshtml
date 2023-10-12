@@ -1,0 +1,68 @@
+﻿@model Tuple<IEnumerable<Report>,IEnumerable<Userr>>
+
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var chartData = ViewBag.ChartData;
+
+}
+
+
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card">
+       
+     
+            <div class="body">
+                <div id="chart" class="c3_chart d_sales"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        var chartData = @Html.Raw(ViewBag.ChartData);
+
+        var chart = c3.generate({
+            bindto: '#chart', // id of chart wrapper
+            data: {
+                columns: [
+                    ['Profits'].concat(chartData.profits),
+                    ['Total Prices'].concat(chartData.totalPrices),
+                    ['Quantities'].concat(chartData.quantities),
+                ],
+                type: 'area-spline', // default type of chart
+                groups: [
+                    ['Profits', 'Total Prices', 'Quantities']
+                ],
+                colors: {
+                    'Profits': '#5CC5CD', // Customize color for 'Profits'
+                    'Total Prices': '#46b6fe', // Customize color for 'Total Prices'
+                    'Quantities': '#FFA500', // Customize color for 'Quantities'
+                },
+                names: {
+                    'Profits': 'Profits',
+                    'Total Prices': 'Total Prices',
+                    'Quantities': 'Quantities',
+                }
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: chartData.labels
+                }
+            },
+            legend: {
+                show: true
+            },
+            padding: {
+                bottom: 10,
+                top: 20
+            }
+        });
+    });
+
+
+</script>

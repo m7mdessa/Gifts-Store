@@ -1,0 +1,138 @@
+﻿@model Gifts_Store.Models.Testimonial
+
+@{
+	ViewData["Title"] = "Dashboard";
+	Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+@if (ViewBag.ID != null || ViewBag.SName != null)
+{
+
+	<nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+		<div class="container">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a asp-controller="Sender" asp-action="Index">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">My Account</li>
+			</ol>
+		</div><!-- End .container -->
+	</nav>
+
+	<!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+	<div class="dashboard">
+		<div class="container">
+			<div class="row">
+
+				<aside class="col-md-4 col-lg-3">
+					<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+
+
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Sender" asp-action="Order" asp-route-id="@ViewBag.ID" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Sender" asp-action="Edit" asp-route-id="@ViewBag.ID" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Sender" asp-action="Payments" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Payments</a>
+							</li>
+							<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="Testimonial" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Add Testimonials</a>
+							</li>
+															<li class="nav-item">
+									<a class="nav-link" asp-controller="Sender" asp-action="yourTestimonial" role="tab" asp-route-id="@ViewBag.ID" aria-controls="tab-account" aria-selected="false">Your Testimonials</a>
+								</li>
+
+							<li class="nav-item">
+								<a class="nav-link" asp-controller="Auth" asp-action="Logout">Sign Out</a>
+							</li>
+						
+
+					</ul>
+				</aside><!-- End .col-lg-3 -->
+
+				<div class="col-md-8 col-lg-9">
+
+
+
+
+					<div class="tab-content">
+
+						
+
+							<div class="tab-pane fade show active"  role="tabpanel" aria-labelledby="tab-account-link">
+
+								<form asp-action="Testimonial" enctype="multipart/form-data">
+										<input asp-for="UserId" type="hidden" value="@ViewBag.ID "  />
+										<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+									@if (TempData["SuccessMessage"] != null)
+									{
+										<h6 style="text-align:center ; color: red;">
+											@TempData["SuccessMessage"]
+										</h6>
+									}
+
+
+									<div class="row">
+											
+										<div class="col-sm-6">
+
+											<label> Name </label>
+											<input asp-for="Namee" class="form-control"  />
+											<span asp-validation-for="Namee" value="@ViewBag.ID " class="text-danger"></span>
+
+										</div>
+										<div class="col-sm-6">
+
+											<label>Your Testimonial </label>
+											<textarea class="form-control" asp-for="Content" cols="30" rows="4"  placeholder="Testimonial "></textarea>
+
+											<span asp-validation-for="Content" class="text-danger"></span>
+										</div>
+										
+											
+									</div>
+									
+									<button type="submit" class="btn btn-outline-primary-2">
+										<span>Add  Testimonial</span>
+										<i class="icon-long-arrow-right"></i>
+									</button>
+								</form>
+							</div>
+						
+					</div>
+
+				</div><!-- End .col-lg-9 -->
+
+			</div><!-- End .row -->
+		</div><!-- End .container -->
+	</div><!-- End .dashboard -->
+</div><!-- End .page-content -->
+}
+else
+{
+<div class="page-content">
+	<div class="dashboard">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-8 col-lg-9">
+
+
+
+					<p> To access to account you have to sing in first </p>
+					<a asp-action="Login" asp-controller="Auth" class="btn btn-outline-primary-2"><span>GO SING IN</span><i class="icon-long-arrow-right"></i></a>
+
+
+
+				</div><!-- End .col-lg-9 -->
+			</div><!-- End .row -->
+		</div><!-- End .container -->
+	</div><!-- End .dashboard -->
+</div>
+
+<!-- End .page-content -->
+}
